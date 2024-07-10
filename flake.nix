@@ -3,13 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-filter.url = "github:numtide/nix-filter";
     gomod2nix = {
         url = "github:nix-community/gomod2nix";
         inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, gomod2nix }:
+  outputs = { self, nixpkgs, nix-filter, gomod2nix }:
     let
       systems = [
         "x86_64-linux"
@@ -23,6 +24,7 @@
     in
     {
       legacyPackages = forAllSystems (system: import ./default.nix {
+        inherit nix-filter;
         pkgs = import nixpkgs {
           inherit system;
           overlays = [ gomod2nix.overlays.default ];

@@ -5,23 +5,43 @@
 , fetchFromGitHub
 , ffmpeg
 , libwebp
+, nix-filter
 }:
 
 let
 
   v = "1.9.0";
 
+  gitSrc = nix-filter{
+    name = "watgbridge";
+    root = fetchFromGitHub {
+      owner = "akshettrj";
+      repo = "watgbridge";
+      rev = "v${v}";
+      hash = "sha256-FhPsvcn2xwOkbxotGnq4A5uKPX9K8qbY/JACDP1r6uk=";
+    };
+    exclude = [
+      "flake.nix"
+      "flake.lock"
+      "README.md"
+      "sample_config.yaml"
+      "watgbridge.service.sample"
+      ".github"
+      "nix"
+      "assets"
+      ".envrc"
+      ".gitignore"
+      "Dockerfile"
+      "LICENSE"
+    ];
+  };
+
 in buildGoApplication rec {
   pname = "watgbridge";
   version = v;
 
-  pwd = fetchFromGitHub {
-    owner = "akshettrj";
-    repo = "watgbridge";
-    rev = "v${v}";
-    hash = "sha256-FhPsvcn2xwOkbxotGnq4A5uKPX9K8qbY/JACDP1r6uk=";
-  };
-  src = pwd;
+  pwd = gitSrc;
+  src = gitSrc;
 
   ldflags = [ "-s" "-w" ];
 
