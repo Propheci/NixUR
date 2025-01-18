@@ -10,7 +10,7 @@
 
 let
 
-  v = "1.9.5";
+  v = "1.12.0";
 
   gitSrc = nix-filter{
     name = "watgbridge";
@@ -18,7 +18,7 @@ let
       owner = "akshettrj";
       repo = "watgbridge";
       rev = "v${v}";
-      hash = "sha256-eNGR6E1g9VEsyb3x9Ne5D9oIPaceu1ejiWvtdQMs6vg=";
+      hash = "sha256-cNy/ybkKwicmXLOJbJ2ip/Z+9J7m2R1Iio2bmrLiGtI=";
     };
     exclude = [
       "flake.nix"
