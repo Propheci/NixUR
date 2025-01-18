@@ -1,5 +1,6 @@
 { pkgs,
-  nix-filter
+  fenix,
+  nix-filter,
 }:
 
 {
@@ -9,4 +10,5 @@
 
   drivedlgo = pkgs.callPackage ./pkgs/drivedlgo { inherit nix-filter; };
   watgbridge = pkgs.callPackage ./pkgs/watgbridge { inherit nix-filter; };
+  pleezer = pkgs.callPackage ./pkgs/pleezer { inherit nix-filter fenix; };
 }
