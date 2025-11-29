@@ -10,7 +10,7 @@
 }:
 
 let
-  version = "linux-v0.1.0";
+  version = "0.1.0";
   originalSource = nix-filter {
     name = "librepods";
     root = fetchFromGitHub {
