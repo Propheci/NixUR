@@ -30,23 +30,29 @@ in stdenv.mkDerivation {
 
   nativeBuildInputs = [
     cmake
-    qt6.full
     pkg-config
+    qt6.full
+    qt6.wrapQtAppsHook
   ];
 
   buildInputs = [
     openssl.dev
     libpulseaudio
+    qt6.qtbase
+  ];
+
+  qtWrapperArgs = [
+    "--set" "QT_QPA_PLATFORM" "xcb"
   ];
 
   PKG_CONFIG_PATH = "${openssl.dev}/lib/pkgconfig";
 
   meta = with lib; {
-    description = "A Minimal Google Drive Downloader Written in Go";
-    homepage = "https://github.com/JaskaranSM/drivedlgo";
-    changelog = "https://github.com/JaskaranSM/drivedlgo/releases/tag/${version}";
+    description = "Control Airpods from linux";
+    homepage = "https://github.com/kavishdevar/librepods";
+    changelog = "https://github.com/kavishdevar/librepods/releases/tag/linux-v${version}";
     license = licenses.gpl3;
-    # mainProgram = "";
+    mainProgram = "librepods";
   };
 }
 
